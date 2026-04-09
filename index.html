@@ -11,7 +11,7 @@
 --white-gold:#EDE8DA;--pearl:#F5F0E6;--silver:#A8B8C8;--ruby:#8B1A3A;--diamond:#D0EEFF;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--pearl);font-family:'EB Garamond',serif;overflow-x:hidden;cursor:none;}
+body{background:var(--black);color:var(--pearl);font-family:'EB Garamond',serif;overflow-x:hidden;cursor:default;}
 .cursor{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
 .cursor-ring{width:36px;height:36px;border:1px solid rgba(201,168,76,.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
 #starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
@@ -533,5 +533,6 @@ const obs=new IntersectionObserver(e=>e.forEach(e=>{if(e.isIntersecting)e.target
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 function handleSubmit(e){e.preventDefault();const b=document.getElementById('sbtn');b.textContent='✦ Запрос получен — скоро свяжусь с вами';b.style.borderColor='var(--gold3)';b.style.color='var(--gold3)';b.disabled=true;}
 </script>
+<script> document.querySelectorAll('.reveal').forEach(el => { el.classList.add('on'); }); </script>
 </body>
 </html>
