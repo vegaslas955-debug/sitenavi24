@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кристина Рогозянская · NAVI 21 · Эксперт по Астрологии, Нумерологии и Таро</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#04050F;--navy:#080C1E;--navy2:#0D1230;--indigo:#12164A;
+  --sapphire:#1B3A6B;--gold:#C9A84C;--gold2:#E2BC5E;--gold3:#F5D878;
+  --white-gold:#EDE8DA;--pearl:#F5F0E6;--silver:#A8B8C8;
+  --ruby:#8B1A3A;--diamond:#D0EEFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--pearl);font-family:'EB Garamond',serif;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cursor{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;}
+.cursor-ring{width:36px;height:36px;border:1px solid rgba(201,168,76,.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 60px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(4,5,15,.95) 0%,transparent 100%);backdrop-filter:blur(12px);}
+.nav-brand{font-family:'Cinzel',serif;font-size:14px;letter-spacing:8px;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:12px;}
+.nav-star{display:inline-block;animation:spin 20s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--silver);text-decoration:none;text-transform:uppercase;transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-decoration:none;text-transform:uppercase;border:1px solid rgba(201,168,76,.4);padding:10px 24px;transition:all .3s;}
+.nav-cta:hover{background:rgba(201,168,76,.1);border-color:var(--gold);}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 40px 80px;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(27,58,107,.2) 0%,transparent 70%);}
+
+/* COMPASS SVG WRAPPER */
+.hero-logo{width:200px;height:200px;margin:0 auto 48px;animation:float 7s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(201,168,76,.5)) drop-shadow(0 0 50px rgba(27,58,107,.4));}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-14px) rotate(1deg);}}
+
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:8px;color:var(--gold);opacity:.7;text-transform:uppercase;margin-bottom:24px;animation:fadeUp 1s ease .2s both;}
+.hero-name{font-family:'Cinzel',serif;font-size:clamp(38px,7vw,80px);font-weight:700;letter-spacing:6px;color:var(--white-gold);line-height:1;animation:fadeUp 1s ease .4s both;text-shadow:0 0 60px rgba(201,168,76,.25);}
+.hero-name span{display:block;font-size:clamp(22px,3.5vw,40px);font-weight:400;letter-spacing:10px;color:var(--gold);margin-top:8px;}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,2.5vw,22px);color:var(--silver);max-width:640px;line-height:1.9;margin:28px auto 0;animation:fadeUp 1s ease .6s both;}
+.hero-divider{display:flex;align-items:center;gap:20px;margin:36px auto;animation:fadeUp 1s ease .7s both;}
+.hero-divider::before,.hero-divider::after{content:'';width:80px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.hero-divider::after{background:linear-gradient(to left,transparent,var(--gold));}
+.hero-divider-icon{color:var(--gold);font-size:18px;}
+.hero-pills{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;animation:fadeUp 1s ease .8s both;}
+.pill{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;border:1px solid rgba(201,168,76,.3);padding:8px 20px;color:var(--gold);text-transform:uppercase;transition:all .3s;}
+.pill:hover{background:rgba(201,168,76,.08);}
+.hero-buttons{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;animation:fadeUp 1s ease 1s both;}
+.btn-primary{padding:16px 48px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-decoration:none;text-transform:uppercase;transition:all .4s;display:inline-block;}
+.btn-primary:hover{background:linear-gradient(135deg,rgba(201,168,76,.25),rgba(201,168,76,.1));box-shadow:0 0 40px rgba(201,168,76,.2);transform:translateY(-2px);}
+.btn-secondary{padding:16px 48px;border:1px solid rgba(168,184,200,.3);color:var(--silver);font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-decoration:none;text-transform:uppercase;transition:all .3s;display:inline-block;}
+.btn-secondary:hover{border-color:var(--silver);color:var(--pearl);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp 1s ease 1.4s both;}
+.scroll-indicator span{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:rgba(168,184,200,.5);text-transform:uppercase;}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 2s ease infinite;}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:100px 60px;max-width:1200px;margin:0 auto;}
+.sec-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:6px;color:var(--gold);opacity:.6;text-transform:uppercase;text-align:center;margin-bottom:12px;}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(22px,4vw,42px);font-weight:600;color:var(--white-gold);text-align:center;letter-spacing:5px;margin-bottom:16px;}
+.gold-line{width:60px;height:1px;margin:0 auto 60px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+
+/* ABOUT */
+.about-wrapper{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;}
+.about-badge{position:relative;border:1px solid rgba(201,168,76,.2);padding:48px 36px;background:linear-gradient(145deg,rgba(27,58,107,.12),rgba(4,5,15,.9));text-align:center;}
+.about-badge::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.about-photo-placeholder{width:140px;height:140px;margin:0 auto 24px;border-radius:50%;border:2px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-size:50px;background:radial-gradient(circle,rgba(27,58,107,.4),rgba(4,5,15,.8));box-shadow:0 0 30px rgba(201,168,76,.2);}
+.about-badge-name{font-family:'Cinzel',serif;font-size:20px;letter-spacing:4px;color:var(--white-gold);margin-bottom:6px;}
+.about-badge-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--gold);letter-spacing:2px;margin-bottom:30px;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.stat{border:1px solid rgba(201,168,76,.15);padding:20px 12px;text-align:center;transition:all .3s;}
+.stat:hover{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.04);}
+.stat-n{font-family:'Cinzel',serif;font-size:32px;color:var(--gold);display:block;line-height:1;}
+.stat-l{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--silver);margin-top:4px;display:block;}
+.about-content p{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.95;color:var(--pearl);margin-bottom:22px;}
+.about-content em{color:var(--gold);font-style:italic;}
+.about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;}
+.tag{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;border:1px solid rgba(201,168,76,.2);padding:7px 16px;color:var(--silver);text-transform:uppercase;}
+
+/* EXPERTISE */
+.expertise-bg{background:linear-gradient(180deg,transparent,rgba(27,58,107,.05),transparent);}
+.keys-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.key-card{padding:56px 36px 48px;border:1px solid rgba(201,168,76,.12);background:rgba(4,5,15,.7);text-align:center;position:relative;overflow:hidden;transition:all .5s;cursor:default;}
+.key-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s;}
+.key-card:hover{background:rgba(27,58,107,.12);transform:translateY(-6px);}
+.key-card:hover::after{transform:scaleX(1);}
+.key-num{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;color:var(--gold);opacity:.4;margin-bottom:24px;}
+.key-glyph{font-size:48px;margin-bottom:20px;display:block;filter:drop-shadow(0 0 12px rgba(201,168,76,.5));}
+.key-name{font-family:'Cinzel',serif;font-size:16px;letter-spacing:4px;color:var(--white-gold);margin-bottom:18px;}
+.key-desc{font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.85;color:var(--silver);}
+.key-list{list-style:none;margin-top:20px;text-align:left;}
+.key-list li{font-family:'EB Garamond',serif;font-size:15px;color:var(--silver);padding:6px 0;border-bottom:1px solid rgba(201,168,76,.08);display:flex;align-items:center;gap:10px;}
+.key-list li::before{content:'✦';color:var(--gold);font-size:8px;flex-shrink:0;}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.svc{display:grid;grid-template-columns:auto 1fr;gap:24px;padding:36px 32px;border:1px solid rgba(201,168,76,.12);background:rgba(4,5,15,.6);transition:all .3s;position:relative;overflow:hidden;}
+.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+.svc:hover{border-color:rgba(201,168,76,.3);background:rgba(27,58,107,.08);}
+.svc:hover::before{opacity:1;}
+.svc-icon{font-size:32px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(201,168,76,.4));}
+.svc-name{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--gold);margin-bottom:10px;}
+.svc-desc{font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.75;color:var(--silver);}
+.svc-price{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:rgba(201,168,76,.7);margin-top:14px;display:inline-block;border-bottom:1px solid rgba(201,168,76,.2);padding-bottom:2px;}
+
+/* BENTO */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(120px,auto);gap:16px;}
+.bento-card{border:1px solid rgba(201,168,76,.15);background:rgba(4,5,15,.7);padding:40px 36px;position:relative;overflow:hidden;transition:all .4s;}
+.bento-card:hover{border-color:rgba(201,168,76,.35);background:rgba(27,58,107,.1);}
+.bento-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.bento-1{grid-column:span 7;grid-row:span 2;}
+.bento-2{grid-column:span 5;}
+.bento-3{grid-column:span 5;}
+.bento-4{grid-column:span 4;grid-row:span 2;}
+.bento-5{grid-column:span 4;grid-row:span 2;}
+.bento-6{grid-column:span 4;grid-row:span 2;}
+.bento-tag{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:var(--gold);opacity:.6;margin-bottom:14px;}
+.bento-title{font-family:'Cinzel',serif;font-size:18px;letter-spacing:3px;color:var(--white-gold);margin-bottom:14px;}
+.bento-desc{font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.8;color:var(--silver);}
+.bento-num{font-family:'Cinzel',serif;font-size:72px;font-weight:900;color:rgba(201,168,76,.07);position:absolute;bottom:16px;right:24px;line-height:1;}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.testi{padding:40px 32px;border:1px solid rgba(201,168,76,.1);background:rgba(4,5,15,.6);position:relative;transition:all .3s;}
+.testi:hover{border-color:rgba(201,168,76,.3);}
+.testi-quote{font-size:64px;color:rgba(201,168,76,.1);font-family:Georgia,serif;line-height:1;position:absolute;top:12px;left:20px;}
+.testi-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;line-height:1.9;color:var(--pearl);padding-top:24px;margin-bottom:28px;}
+.testi-stars{color:var(--gold);font-size:12px;letter-spacing:4px;margin-bottom:14px;}
+.testi-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--gold);}
+.testi-role{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--silver);margin-top:4px;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start;}
+.contact-heading{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--gold);margin-bottom:36px;line-height:1.6;}
+.contact-item{display:flex;align-items:flex-start;gap:20px;padding:20px 0;border-bottom:1px solid rgba(201,168,76,.1);}
+.contact-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+.contact-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--gold);opacity:.6;display:block;margin-bottom:5px;}
+.contact-val{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--pearl);}
+.contact-val a{color:var(--pearl);text-decoration:none;transition:color .3s;}
+.contact-val a:hover{color:var(--gold);}
+.contact-social{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
+.social-btn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;border:1px solid rgba(201,168,76,.25);padding:12px 24px;color:var(--silver);text-decoration:none;text-transform:uppercase;transition:all .3s;display:flex;align-items:center;gap:8px;}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.05);}
+.form{display:flex;flex-direction:column;gap:18px;}
+.form-group label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.6);display:block;margin-bottom:8px;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(27,58,107,.08);border:1px solid rgba(201,168,76,.18);padding:14px 16px;color:var(--pearl);font-family:'Cormorant Garamond',serif;font-size:17px;outline:none;resize:none;transition:border-color .3s;-webkit-appearance:none;}
+.form-group select option{background:var(--navy);}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(201,168,76,.5);}
+.form-submit{padding:16px 40px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;align-self:flex-start;}
+.form-submit:hover{background:rgba(201,168,76,.1);box-shadow:0 0 24px rgba(201,168,76,.2);}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid rgba(201,168,76,.1);padding:70px 60px 50px;text-align:center;background:linear-gradient(to top,rgba(27,58,107,.06),transparent);}
+.footer-logo{width:80px;height:80px;margin:0 auto 20px;animation:spin 30s linear infinite;filter:drop-shadow(0 0 10px rgba(201,168,76,.4));}
+.footer-name{font-family:'Cinzel',serif;font-size:22px;letter-spacing:8px;color:var(--gold);margin-bottom:6px;}
+.footer-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--silver);letter-spacing:2px;margin-bottom:40px;}
+.footer-links{display:flex;justify-content:center;gap:40px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-links a{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--silver);text-decoration:none;transition:color .3s;text-transform:uppercase;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(168,184,200,.3);letter-spacing:2px;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 20px;}
+  .nav-links,.nav-cta{display:none;}
+  section{padding:70px 20px;}
+  .about-wrapper,.contact-grid{grid-template-columns:1fr;gap:40px;}
+  .keys-grid,.services-grid,.testi-grid{grid-template-columns:1fr;}
+  .bento{grid-template-columns:1fr;}
+  .bento-1,.bento-2,.bento-3,.bento-4,.bento-5,.bento-6{grid-column:span 1;grid-row:span 1;}
+  footer{padding:50px 20px 40px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <!-- Tiny inline compass in nav -->
+    <svg width="20" height="20" viewBox="0 0 40 40" fill="none" class="nav-star">
+      <circle cx="20" cy="20" r="18" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+      <!-- 8-point star: 4 long + 4 short, no overlap -->
+      <path d="M20 2 L22 18 L20 38 L18 18 Z" fill="#C9A84C"/>
+      <path d="M2 20 L18 22 L38 20 L18 18 Z" fill="#C9A84C"/>
+      <path d="M7.5 7.5 L18.5 18.5 L32.5 7.5 L21.5 18.5 Z" fill="#C9A84C" opacity="0.7"/>
+      <path d="M32.5 32.5 L21.5 21.5 L7.5 32.5 L18.5 21.5 Z" fill="#C9A84C" opacity="0.7"/>
+      <circle cx="20" cy="20" r="3" fill="#D0EEFF"/>
+    </svg>
+    NAVI · XXI
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Об эксперте</a></li>
+    <li><a href="#expertise">Направления</a></li>
+    <li><a href="#services">Консультации</a></li>
+    <li><a href="#projects">Проекты</a></li>
+    <li><a href="#contact">Контакт</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Записаться ✦</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <!-- PERFECT 8-POINT COMPASS LOGO -->
+  <div class="hero-logo">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bgFace" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#0D1E4A"/>
+          <stop offset="60%" stop-color="#07102A"/>
+          <stop offset="100%" stop-color="#020510"/>
+        </radialGradient>
+        <radialGradient id="diaGrad" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#FFFFFF"/>
+          <stop offset="30%" stop-color="#D0EEFF"/>
+          <stop offset="70%" stop-color="#6AB0E8"/>
+          <stop offset="100%" stop-color="#1B5FA8"/>
+        </radialGradient>
+        <radialGradient id="goldGrad" cx="50%" cy="0%" r="100%">
+          <stop offset="0%" stop-color="#F5D878"/>
+          <stop offset="50%" stop-color="#C9A84C"/>
+          <stop offset="100%" stop-color="#8A6820"/>
+        </radialGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="diaGlow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Outer decorative ring -->
+      <circle cx="100" cy="100" r="97" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="100" cy="100" r="93" stroke="#C9A84C" stroke-width="0.4" opacity="0.25"/>
+
+      <!-- Gem dots at 8 positions on outer ring -->
+      <circle cx="100" cy="4"   r="2.5" fill="#1B6BBF" opacity="0.9"/>
+      <circle cx="169" cy="31"  r="2"   fill="#C9A84C" opacity="0.9"/>
+      <circle cx="196" cy="100" r="2.5" fill="#1B6BBF" opacity="0.9"/>
+      <circle cx="169" cy="169" r="2"   fill="#C9A84C" opacity="0.9"/>
+      <circle cx="100" cy="196" r="2.5" fill="#1B6BBF" opacity="0.9"/>
+      <circle cx="31"  cy="169" r="2"   fill="#C9A84C" opacity="0.9"/>
+      <circle cx="4"   cy="100" r="2.5" fill="#1B6BBF" opacity="0.9"/>
+      <circle cx="31"  cy="31"  r="2"   fill="#C9A84C" opacity="0.9"/>
+
+      <!-- Main face -->
+      <circle cx="100" cy="100" r="88" fill="url(#bgFace)"/>
+      <circle cx="100" cy="100" r="88" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+
+      <!-- Inner decorative rings -->
+      <circle cx="100" cy="100" r="76" stroke="#C9A84C" stroke-width="0.5" opacity="0.2"/>
+      <circle cx="100" cy="100" r="62" stroke="#C9A84C" stroke-width="0.5" opacity="0.15"/>
+      <circle cx="100" cy="100" r="45" stroke="#C9A84C" stroke-width="0.4" opacity="0.12"/>
+
+      <!-- Tick marks at cardinal + intercardinal -->
+      <g stroke="#C9A84C" stroke-width="0.8" opacity="0.4">
+        <line x1="100" y1="13" x2="100" y2="22"/>
+        <line x1="100" y1="178" x2="100" y2="187"/>
+        <line x1="13" y1="100" x2="22" y2="100"/>
+        <line x1="178" y1="100" x2="187" y2="100"/>
+        <line x1="139" y1="22" x2="134" y2="30"/>
+        <line x1="61" y1="22" x2="66" y2="30"/>
+        <line x1="139" y1="178" x2="134" y2="170"/>
+        <line x1="61" y1="178" x2="66" y2="170"/>
+      </g>
+
+      <!-- Constellation dots on face -->
+      <g fill="#C9A84C" opacity="0.2">
+        <circle cx="65" cy="55" r="1"/><circle cx="72" cy="60" r="0.8"/><circle cx="60" cy="62" r="0.7"/>
+        <circle cx="135" cy="55" r="1"/><circle cx="142" cy="48" r="0.8"/><circle cx="148" cy="60" r="0.7"/>
+        <circle cx="70" cy="140" r="1"/><circle cx="62" cy="148" r="0.8"/><circle cx="75" cy="150" r="0.7"/>
+        <circle cx="130" cy="145" r="1"/><circle cx="140" cy="138" r="0.8"/><circle cx="135" cy="155" r="0.7"/>
+      </g>
+
+      <!-- ===================== -->
+      <!-- PERFECT 8-POINT STAR  -->
+      <!-- ===================== -->
+      <!-- Method: draw each of 8 points as separate path, no overlapping fills -->
+
+      <!-- N point (long) -->
+      <path d="M100,22 L103.5,96 L100,100 L96.5,96 Z" fill="url(#goldGrad)" filter="url(#glow)"/>
+      <!-- S point (long) -->
+      <path d="M100,178 L103.5,104 L100,100 L96.5,104 Z" fill="url(#goldGrad)" filter="url(#glow)"/>
+      <!-- E point (long) -->
+      <path d="M178,100 L104,96.5 L100,100 L104,103.5 Z" fill="url(#goldGrad)" filter="url(#glow)"/>
+      <!-- W point (long) -->
+      <path d="M22,100 L96,96.5 L100,100 L96,103.5 Z" fill="url(#goldGrad)" filter="url(#glow)"/>
+
+      <!-- NE point (shorter diagonal) -->
+      <path d="M153,47 L105,95 L100,100 L95,105 L103,97 Z" fill="#C9A84C" opacity="0.75" filter="url(#glow)"/>
+      <path d="M153,47 L103,97 L100,100 L108,92 Z" fill="#B8943F" opacity="0.85"/>
+      <!-- SW point -->
+      <path d="M47,153 L95,105 L100,100 L97,108 Z" fill="#C9A84C" opacity="0.75" filter="url(#glow)"/>
+      <path d="M47,153 L97,103 L100,100 L92,97 Z" fill="#B8943F" opacity="0.85"/>
+      <!-- NW point -->
+      <path d="M47,47 L95,95 L100,100 L97,92 Z" fill="#C9A84C" opacity="0.75" filter="url(#glow)"/>
+      <path d="M47,47 L97,97 L100,100 L92,103 Z" fill="#B8943F" opacity="0.85"/>
+      <!-- SE point -->
+      <path d="M153,153 L105,105 L100,100 L103,108 Z" fill="#C9A84C" opacity="0.75" filter="url(#glow)"/>
+      <path d="M153,153 L103,103 L100,100 L108,97 Z" fill="#B8943F" opacity="0.85"/>
+
+      <!-- Diamond center -->
+      <circle cx="100" cy="100" r="17" fill="url(#diaGrad)" filter="url(#diaGlow)"/>
+      <!-- Diamond facets -->
+      <circle cx="100" cy="100" r="13" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/>
+      <line x1="100" y1="83" x2="100" y2="117" stroke="white" stroke-width="0.5" opacity="0.6"/>
+      <line x1="83" y1="100" x2="117" y2="100" stroke="white" stroke-width="0.5" opacity="0.6"/>
+      <line x1="88" y1="88" x2="112" y2="112" stroke="white" stroke-width="0.4" opacity="0.35"/>
+      <line x1="112" y1="88" x2="88" y2="112" stroke="white" stroke-width="0.4" opacity="0.35"/>
+      <!-- Sparkle -->
+      <circle cx="95" cy="94" r="2.5" fill="white" opacity="0.7"/>
+      <circle cx="95" cy="94" r="1.2" fill="white"/>
+
+      <!-- NAVI text top -->
+      <text x="100" y="19" font-family="'Cinzel', serif" font-size="9.5" fill="#C9A84C" text-anchor="middle" letter-spacing="5" opacity="0.9">NAVI</text>
+      <!-- 21 text bottom -->
+      <text x="100" y="188" font-family="'Cinzel', serif" font-size="9.5" fill="#C9A84C" text-anchor="middle" letter-spacing="5" opacity="0.9">21</text>
+      <!-- W E N S cardinal labels -->
+      <text x="29" y="104" font-family="'Cinzel', serif" font-size="7" fill="#C9A84C" text-anchor="middle" opacity="0.55">W</text>
+      <text x="171" y="104" font-family="'Cinzel', serif" font-size="7" fill="#C9A84C" text-anchor="middle" opacity="0.55">E</text>
+    </svg>
+  </div>
+
+  <p class="hero-eyebrow">✦ Аркан XXI · Le Monde · Astra Navigation ✦</p>
+  <h1 class="hero-name">
+    Кристина Рогозянская
+    <span>Expert · Navigator · Creator</span>
+  </h1>
+  <div class="hero-divider"><span class="hero-divider-icon">✦</span></div>
+  <p class="hero-tagline">
+    «Древние коды Вселенной — переведены в точный язык вашей судьбы.<br>
+    Астрология · Нумерология · Таро как инструмент стратегической навигации.»
+  </p>
+  <div class="hero-pills">
+    <div class="pill">☽ Астрология</div>
+    <div class="pill">∞ Нумерология</div>
+    <div class="pill">✦ Таро</div>
+    <div class="pill">◈ NAVI 21 App</div>
+    <div class="pill">♪ Музыка &amp; Мистика</div>
+  </div>
+  <div class="hero-buttons">
+    <a href="#contact" class="btn-primary">✦ Записаться на сессию</a>
+    <a href="#projects" class="btn-secondary">Проекты →</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">Аркан II · Верховная Жрица</div>
+  <h2 class="sec-title">Об Эксперте</h2>
+  <div class="gold-line"></div>
+  <div class="about-wrapper reveal">
+    <div class="about-badge">
+      <div class="about-photo-placeholder">✦</div>
+      <div class="about-badge-name">Кристина Рогозянская</div>
+      <div class="about-badge-title">Эксперт · Автор · Создатель</div>
+      <div class="about-stats">
+        <div class="stat"><span class="stat-n">20+</span><span class="stat-l">Лет практики</span></div>
+        <div class="stat"><span class="stat-n">3 000+</span><span class="stat-l">Сессий</span></div>
+        <div class="stat"><span class="stat-n">12</span><span class="stat-l">Стран</span></div>
+        <div class="stat"><span class="stat-n">7</span><span class="stat-l">Проектов</span></div>
+      </div>
+    </div>
+    <div class="about-content">
+      <p>Я — <em>эксперт по астрологии, нумерологии и Таро</em> с более чем 20-летней практикой. Оперная певица с международной карьерой. Автор трансформационных программ и музыкально-мистических проектов.</p>
+      <p>Моя специализация — <em>синтез трёх древних систем</em> в единый инструмент навигации. Астрология, нумерология Пифагора и герметическое Таро Висконти-Сфорца работают как <em>единый компас</em> — из точки А в точку Б.</p>
+      <p>Создатель эзотерического мобильного приложения <em>NAVI 21</em> — первого продукта, переводящего язык древних символов в точный цифровой инструмент личной навигации XXI века.</p>
+      <div class="about-tags">
+        <span class="tag">Натальная астрология</span>
+        <span class="tag">Матрица судьбы</span>
+        <span class="tag">Таро Висконти</span>
+        <span class="tag">Оперный вокал</span>
+        <span class="tag">Digital Esoterics</span>
+        <span class="tag">NAVI 21 App</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise" class="expertise-bg" style="max-width:100%;padding:100px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 60px;">
+    <div class="sec-label">Аркан X · Колесо Фортуны</div>
+    <h2 class="sec-title">Три Ключа Навигации</h2>
+    <div class="gold-line"></div>
+    <div class="keys-grid reveal">
+      <div class="key-card">
+        <div class="key-num">Ключ I</div>
+        <span class="key-glyph">☽</span>
+        <h3 class="key-name">Астрология</h3>
+        <p class="key-desc">Небесная карта как стратегический инструмент. Точность планетарных законов — на службе вашей жизни.</p>
+        <ul class="key-list">
+          <li>Натальная карта · полный разбор</li>
+          <li>Транзиты и прогрессии</li>
+          <li>Синастрия и совместимость</li>
+          <li>Хорарная и мунданная</li>
+          <li>Ректификация даты рождения</li>
+        </ul>
+      </div>
+      <div class="key-card">
+        <div class="key-num">Ключ II</div>
+        <span class="key-glyph">∞</span>
+        <h3 class="key-name">Нумерология</h3>
+        <p class="key-desc">Числовые коды Вселенной от Пифагора до Каббалы. Матрица вашей судьбы в цифрах.</p>
+        <ul class="key-list">
+          <li>Пифагорейская система</li>
+          <li>Матрица судьбы</li>
+          <li>Нумерология имени и даты</li>
+          <li>Личный год и месяц</li>
+          <li>Числовой архетип личности</li>
+        </ul>
+      </div>
+      <div class="key-card">
+        <div class="key-num">Ключ III</div>
+        <span class="key-glyph">✦</span>
+        <h3 class="key-name">Таро</h3>
+        <p class="key-desc">Арканы как зеркало подсознания. Висконти-Сфорца · Уэйт · Тот — три традиции, одна истина.</p>
+        <ul class="key-list">
+          <li>Стратегические расклады</li>
+          <li>Работа со Старшими Арканами</li>
+          <li>Таро + Астрология (синтез)</li>
+          <li>Расклад на год и цикл</li>
+          <li>Юнгианская интерпретация</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-label">Аркан I · Маг</div>
+  <h2 class="sec-title">Форматы Работы</h2>
+  <div class="gold-line"></div>
+  <div class="services-grid reveal">
+    <div class="svc">
+      <div class="svc-icon">🔮</div>
+      <div>
+        <div class="svc-name">Натальная Карта · Полный Разбор</div>
+        <div class="svc-desc">Глубокий анализ личности, предназначения и ресурсов через карту рождения. Стратегия на год. 2–3 часа.</div>
+        <span class="svc-price">от 15 000 ₽</span>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">🃏</div>
+      <div>
+        <div class="svc-name">Таро-Сессия · Стратегический Расклад</div>
+        <div class="svc-desc">Расклад на вопрос, ситуацию или период. Арканы как инструмент принятия решений. 60–90 мин.</div>
+        <span class="svc-price">от 8 000 ₽</span>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">∞</div>
+      <div>
+        <div class="svc-name">Нумерологический Портрет</div>
+        <div class="svc-desc">Матрица судьбы + числа имени и даты. Личный год, числовой архетип. Стратегия на 12 месяцев.</div>
+        <span class="svc-price">от 10 000 ₽</span>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">⭐</div>
+      <div>
+        <div class="svc-name">NAVI 21 · Комплексная Навигация</div>
+        <div class="svc-desc">Флагманская программа: астрология + нумерология + Таро в единой сессии. Ваш персональный маршрут. 3–4 часа.</div>
+        <span class="svc-price">от 30 000 ₽</span>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">💫</div>
+      <div>
+        <div class="svc-name">Синастрия · Анализ Отношений</div>
+        <div class="svc-desc">Совместимость двух карт, динамика пары, ресурсы и зоны роста. Личные, деловые, семейные союзы.</div>
+        <span class="svc-price">от 12 000 ₽</span>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">🎵</div>
+      <div>
+        <div class="svc-name">Музыкально-Мистический Проект</div>
+        <div class="svc-desc">Авторские сессии на пересечении оперного искусства и эзотерики. Голос как инструмент трансформации.</div>
+        <span class="svc-price">по запросу</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="max-width:100%;padding:100px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 60px;">
+    <div class="sec-label">Аркан XVII · Звезда</div>
+    <h2 class="sec-title">Ключевые Проекты</h2>
+    <div class="gold-line"></div>
+    <div class="bento reveal">
+      <div class="bento-card bento-1">
+        <div class="bento-tag">Цифровой продукт · 2025–2026</div>
+        <div class="bento-title">NAVI 21 · Приложение-Навигатор</div>
+        <div class="bento-desc">Первый в мире эзотерический мобильный навигатор, объединяющий астрологию, нумерологию и Таро в единой цифровой экосистеме. Визуальный язык — стиль «Le Château du Tarot» Christian Dior SS21. Продукт, переводящий древние коды в интерфейс XXI века.</div>
+        <div class="bento-num">01</div>
+      </div>
+      <div class="bento-card bento-2">
+        <div class="bento-tag">Музыка · Мистика · Перформанс</div>
+        <div class="bento-title">Опера Арканов</div>
+        <div class="bento-desc">Музыкально-мистический перформанс: 22 Аркана — 22 оперные арии. Голос как зеркало судьбы.</div>
+        <div class="bento-num">02</div>
+      </div>
+      <div class="bento-card bento-3">
+        <div class="bento-tag">Образование · Трансформация</div>
+        <div class="bento-title">Школа Небесных Навигаторов</div>
+        <div class="bento-desc">Авторская программа обучения методологии NAVI 21. От символа — к стратегии жизни.</div>
+        <div class="bento-num">03</div>
+      </div>
+      <div class="bento-card bento-4">
+        <div class="bento-tag">Программы</div>
+        <div class="bento-title">Трансформационные курсы</div>
+        <div class="bento-desc">Авторские глубинные программы для осознанного проживания жизненных циклов через эзотерические инструменты.</div>
+        <div class="bento-num">04</div>
+      </div>
+      <div class="bento-card bento-5">
+        <div class="bento-tag">Колода Таро</div>
+        <div class="bento-title">Авторская колода NAVI 21</div>
+        <div class="bento-desc">Таро-колода в стиле Dior × Висконти-Сфорца. Синтез Старших Арканов и навигационных символов.</div>
+        <div class="bento-num">05</div>
+      </div>
+      <div class="bento-card bento-6">
+        <div class="bento-tag">VIP · Консалтинг</div>
+        <div class="bento-title">Годовое Сопровождение</div>
+        <div class="bento-desc">Персональное сопровождение: ежемесячные сессии + навигация по ключевым событиям года.</div>
+        <div class="bento-num">06</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="sec-label">Аркан VI · Влюблённые</div>
+  <h2 class="sec-title">Голоса Клиентов</h2>
+  <div class="gold-line"></div>
+  <div class="testi-grid reveal">
+    <div class="testi">
+      <div class="testi-quote">❝</div>
+      <p class="testi-text">«После сессии NAVI 21 я впервые увидела свою жизнь как карту, а не как хаос. Это не мистика — это стратегия, облачённая в красоту. Кристина работает с невероятной точностью.»</p>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-name">Марина К.</div>
+      <div class="testi-role">Предприниматель, Москва</div>
+    </div>
+    <div class="testi">
+      <div class="testi-quote">❝</div>
+      <p class="testi-text">«Три системы в одной сессии дали понимание, которого я не получала ни от одного коуча. Синтез астрологии и Таро — это нечто абсолютно уникальное.»</p>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-name">Елена С.</div>
+      <div class="testi-role">Арт-директор, Лондон</div>
+    </div>
+    <div class="testi">
+      <div class="testi-quote">❝</div>
+      <p class="testi-text">«Натальная карта вскрыла паттерны, которые я не осознавала 40 лет. Голос Кристины в работе с Арканами — это отдельный инструмент трансформации.»</p>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-name">Ольга В.</div>
+      <div class="testi-role">Психолог, Санкт-Петербург</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">Аркан XXI · Le Monde</div>
+  <h2 class="sec-title">Начать Навигацию</h2>
+  <div class="gold-line"></div>
+  <div class="contact-grid reveal">
+    <div>
+      <p class="contact-heading">«Первый шаг — это письмо.<br>Компас уже знает,<br>куда вам нужно.»</p>
+      <div class="contact-item">
+        <span class="contact-icon">✆</span>
+        <div>
+          <span class="contact-lbl">Телефон · WhatsApp</span>
+          <div class="contact-val"><a href="tel:+79850378888">+7 985 037-88-88</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">✉</span>
+        <div>
+          <span class="contact-lbl">Email</span>
+          <div class="contact-val"><a href="mailto:Kris.rogoz@gmail.com">Kris.rogoz@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">✈</span>
+        <div>
+          <span class="contact-lbl">Telegram</span>
+          <div class="contact-val"><a href="https://t.me/KrisMirro777" target="_blank">@KrisMirro777</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">◉</span>
+        <div>
+          <span class="contact-lbl">Формат работы</span>
+          <div class="contact-val">Zoom · WhatsApp · Лично</div>
+        </div>
+      </div>
+      <div class="contact-social">
+        <a href="https://t.me/KrisMirro777" target="_blank" class="social-btn">✈ Telegram</a>
+        <a href="http://www.facebook.com/share/181yBgpzuN/?mibextid=wwXIfr" target="_blank" class="social-btn">f Facebook</a>
+        <a href="mailto:Kris.rogoz@gmail.com" class="social-btn">✉ Email</a>
+      </div>
+    </div>
+    <form class="form" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Ваше имя</label>
+        <input type="text" placeholder="Как вас зовут?">
+      </div>
+      <div class="form-group">
+        <label>Telegram или Email</label>
+        <input type="text" placeholder="Как с вами связаться?">
+      </div>
+      <div class="form-group">
+        <label>Формат работы</label>
+        <select>
+          <option value="">Выберите направление...</option>
+          <option>Натальная карта</option>
+          <option>Таро-сессия</option>
+          <option>Нумерологический портрет</option>
+          <option>NAVI 21 · Комплекс</option>
+          <option>Синастрия</option>
+          <option>Музыкально-мистический проект</option>
+          <option>VIP-сопровождение</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Ваш запрос</label>
+        <textarea rows="4" placeholder="Что привело вас сюда? Расскажите о своём вопросе..."></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submit-btn">✦ Отправить запрос</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <!-- Small compass in footer -->
+  <div style="display:flex;justify-content:center;margin-bottom:20px;">
+    <svg class="footer-logo" viewBox="0 0 80 80" fill="none">
+      <circle cx="40" cy="40" r="37" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="40" cy="40" r="31" fill="#04050F" opacity="0.8"/>
+      <path d="M40 8 L41.5 38 L40 40 L38.5 38 Z" fill="#C9A84C"/>
+      <path d="M40 72 L41.5 42 L40 40 L38.5 42 Z" fill="#C9A84C"/>
+      <path d="M8 40 L38 38.5 L40 40 L38 41.5 Z" fill="#C9A84C"/>
+      <path d="M72 40 L42 38.5 L40 40 L42 41.5 Z" fill="#C9A84C"/>
+      <path d="M61 19 L42 38 L40 40 L38 42 L41 39 Z" fill="#B8943F" opacity="0.8"/>
+      <path d="M19 61 L38 42 L40 40 L37 43 Z" fill="#B8943F" opacity="0.8"/>
+      <path d="M19 19 L38 38 L40 40 L37 37 Z" fill="#B8943F" opacity="0.8"/>
+      <path d="M61 61 L42 42 L40 40 L43 43 Z" fill="#B8943F" opacity="0.8"/>
+      <circle cx="40" cy="40" r="5" fill="#D0EEFF" opacity="0.9"/>
+    </svg>
+  </div>
+  <div class="footer-name">NAVI · XXI</div>
+  <div class="footer-sub">Кристина Рогозянская · Эксперт по Астрологии, Нумерологии и Таро</div>
+  <div style="width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:0 auto 40px;"></div>
+  <div class="footer-links">
+    <a href="#about">Об эксперте</a>
+    <a href="#expertise">Направления</a>
+    <a href="#services">Консультации</a>
+    <a href="#projects">Проекты</a>
+    <a href="https://t.me/KrisMirro777" target="_blank">Telegram</a>
+    <a href="http://www.facebook.com/share/181yBgpzuN/?mibextid=wwXIfr" target="_blank">Facebook</a>
+    <a href="mailto:Kris.rogoz@gmail.com">Email</a>
+  </div>
+  <p class="footer-copy">© 2026 Кристина Рогозянская · NAVI 21 · Все права защищены<br>«Древние коды. Современная навигация.»</p>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,.svc,.key-card,.stat,.testi,.pill').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='60px';ring.style.height='60px';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';});
+});
+
+// STARFIELD
+const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');
+let W,H,stars=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;initStars();}
+function initStars(){
+  stars=[];
+  for(let i=0;i<180;i++){
+    stars.push({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*1.6+.2,
+      a:Math.random(),
+      da:(Math.random()-.5)*.006,
+      gold:Math.random()>.82
+    });
+  }
+}
+function drawStars(){
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    s.a+=s.da;
+    if(s.a<=0||s.a>=1)s.da*=-1;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=s.gold?`rgba(201,168,76,${s.a})`:`rgba(255,255,255,${s.a*.65})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+window.addEventListener('resize',resize);
+resize();drawStars();
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// FORM
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('submit-btn');
+  btn.textContent='✦ Запрос получен — скоро свяжусь с вами';
+  btn.style.borderColor='var(--gold3)';btn.style.color='var(--gold3)';btn.disabled=true;
+}
+</script>
+</body>
+</html>
